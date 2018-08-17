@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HonoySolving
@@ -12,13 +13,16 @@ namespace HonoySolving
         public static int count;
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter ring count.");
-            count = int.Parse(Console.ReadLine());
-            towers = new Tower[count];
-            InitTowers();
-            Render();
-            MoveStack(count, 0, 2);
-            Console.ReadKey(true);
+            while (true)
+            {
+                Console.WriteLine("Enter ring count.");
+                count = int.Parse(Console.ReadLine());
+                towers = new Tower[3];
+                InitTowers();
+                Console.Clear();
+                Render();
+                MoveStack(count, 0, 2);
+            }
         }
 
         public static void InitTowers()
@@ -71,16 +75,19 @@ namespace HonoySolving
 
         public static void Render()
         {
-            Console.WriteLine("----------------");
             foreach (var tow in towers)
             {
+                Console.Write("|");
                 foreach (var ring in tow.rings)
                 {
-                    Console.Write(ring + "  ");
+                    Console.Write(ring + " ");
                 }
                 Console.WriteLine();
             }
+            Thread.Sleep(500);
+            Console.Clear();
         }
+
     }
 
     public class Tower
